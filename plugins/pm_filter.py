@@ -519,8 +519,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
                             ]
                         )
                     )
-                    tnx_sticker = "CAACAgUAAx0CXrXkIgABAWz1ZA7s2WwwNiIDSFOl2CwHm0Wx6MYAAm4HAAJDI3lUGj4q4nSFc6EeBA"
-                    sticker_send = await client.send_message(chat_id=FILE_CHANNEL, sticker=tnx_sticker)
                     hybrid_tg = await query.message.reply_text(
                         script.FILE_MSG.format(query.from_user.mention, title, size),
                         parse_mode=enums.ParseMode.HTML,
@@ -538,7 +536,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
                         await asyncio.sleep(300)
                         await hybrid_tg.delete()
                         await file_send.delete()
-                        await sticker_send.delete()
                     return
                 else:
                     await query.answer(f"𝖧𝖾𝗒 {query.from_user.first_name}, 𝖳𝗁𝗂𝗌 𝗂𝗌 𝗇𝗈𝗍 𝗒𝗈𝗎𝗋 𝗋𝖾𝗊𝗎𝖾𝗌𝗍 !", show_alert=True)
@@ -557,8 +554,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
                             ]
                         )
                     )
-                    tnx_sticker = "CAACAgUAAx0CXrXkIgABAWz1ZA7s2WwwNiIDSFOl2CwHm0Wx6MYAAm4HAAJDI3lUGj4q4nSFc6EeBA"
-                    sticker_send = await client.send_message(chat_id=FILE_CHANNEL, sticker=tnx_sticker)
                     hybrid_tg = await query.message.reply_text(
                         script.FILE_MSG.format(query.from_user.mention, title, size),
                         parse_mode=enums.ParseMode.HTML,
@@ -576,7 +571,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
                         await asyncio.sleep(300)
                         await hybrid_tg.delete()
                         await file_send.delete()
-                        await sticker_send.delete()
                     return
                 else:
                     await query.answer(f"𝖧𝖾𝗒 {query.from_user.first_name}, 𝖳𝗁𝗂𝗌 𝗂𝗌 𝗇𝗈𝗍 𝗒𝗈𝗎𝗋 𝗋𝖾𝗊𝗎𝖾𝗌𝗍 !", show_alert=True)
@@ -595,8 +589,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
                             ]
                         )
                     )
-                    tnx_sticker = "CAACAgUAAx0CXrXkIgABAWz1ZA7s2WwwNiIDSFOl2CwHm0Wx6MYAAm4HAAJDI3lUGj4q4nSFc6EeBA"
-                    sticker_send = await client.send_message(chat_id=FILE_CHANNEL, sticker=tnx_sticker)
                     hybrid_tg = await query.message.reply_text(
                         script.FILE_MSG.format(query.from_user.mention, title, size),
                         parse_mode=enums.ParseMode.HTML,
@@ -614,7 +606,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
                         await asyncio.sleep(300)
                         await hybrid_tg.delete()
                         await file_send.delete()
-                        await sticker_send.delete()
                 else:
                     await query.answer(f"𝖧𝖾𝗒 {query.from_user.first_name}, 𝖳𝗁𝗂𝗌 𝗂𝗌 𝗇𝗈𝗍 𝗒𝗈𝗎𝗋 𝗋𝖾𝗊𝗎𝖾𝗌𝗍 !", show_alert=True)
                 await query.answer('𝖢𝗁𝖾𝖼𝗄 𝖯𝖬, 𝖨 𝗁𝖺𝗏𝖾 𝗌𝖾𝗇𝗍 𝖿𝗂𝗅𝖾𝗌 𝗂𝗇 𝖯𝖬', show_alert=True)
