@@ -33,7 +33,7 @@ async def get_file_count():
         print("Failed to get file count")
 
 # handle incoming media files
-@Client.on_message((filters.group | filters.channel) & filters.chat(channel_id) if CHAT_ID else (filters.group | filters.channel) & media_filter)
+@Client.on_message((filters.group | filters.channel) & filters.chat(channel_id) & media_filter)
 async def handle_media(client, message):
     global file_sent_count
     file_sent_count += 1
