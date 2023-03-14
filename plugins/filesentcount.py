@@ -17,7 +17,7 @@ async def update_message():
     now = datetime.now().strftime("%d/%m/%Y")
     text = f"Total files sent by bot since 14/03/2023 till {now}: {file_sent_count}"
     try:
-        await app.edit_message_text(chat_id=channel_id, message_id=message_id, text=text)
+        await Client.edit_message_text(chat_id=channel_id, message_id=message_id, text=text)
     except BadRequest as e:
         print(f"Failed to update message: {e}")
 
@@ -25,14 +25,14 @@ async def update_message():
 async def get_file_count():
     global file_sent_count
     try:
-        message = await app.get_messages(chat_id=channel_id, message_ids=message_id)
+        message = await Client.get_messages(chat_id=channel_id, message_ids=message_id)
         text = message.text
         file_sent_count = int(text.split()[-1])
     except:
         print("Failed to get file count")
 
 # handle incoming media files
-@app.on_message(filters.chat(channel_id) & media_filter)
+@Client.on_message(filters.chat(channel_id) & media_filter)
 async def handle_media(client, message):
     global file_sent_count
     file_sent_count += 1
