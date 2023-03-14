@@ -28,6 +28,7 @@ async def get_file_count():
         message = await Client.get_messages(chat_id=channel_id, message_ids=message_id)
         text = message.text
         file_sent_count = int(text.split()[-1])
+        await update_message()  # update the message with the current file count
     except:
         print("Failed to get file count")
 
