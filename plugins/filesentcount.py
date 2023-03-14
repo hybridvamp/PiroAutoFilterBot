@@ -1,4 +1,3 @@
-import asyncio
 from datetime import datetime
 from pyrogram import Client, filters
 from pyrogram.errors import BadRequest
@@ -34,7 +33,7 @@ async def get_file_count():
         print("Failed to get file count")
 
 # handle incoming media files
-@Client.on_message(filters.chat(channel_id) & media_filter)
+@Client.on_message((filters.group | filters.channel) & filters.chat(channel_id) if CHAT_ID else (filters.group | filters.channel) & media_filter)
 async def handle_media(client, message):
     global file_sent_count
     file_sent_count += 1
@@ -42,3 +41,10 @@ async def handle_media(client, message):
         await update_message()
     except:
         print("Failed to update message")
+
+# run the bot
+async def main():
+    await get_file_count()
+
+if __name__ == '__main__':
+    main()
