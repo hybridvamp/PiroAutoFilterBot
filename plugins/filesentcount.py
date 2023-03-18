@@ -42,7 +42,7 @@ async def handle_media(client, message):
     except:
         print("Failed to update message")
 
-# run the bot
+# run the botr
 async def main():
     await get_file_count()
 
