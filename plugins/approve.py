@@ -2,7 +2,7 @@ import os
 import asyncio
 from pyrogram import Client, filters
 from pyrogram.types import Message, User, ChatJoinRequest
-from info import CHAT_ID, TEXT, APPROVED
+from info import CHAT_ID, TEXT, APPROVED, LOG_CHANNEL
 from Script import script
 from database.users_chats_db import db
 
