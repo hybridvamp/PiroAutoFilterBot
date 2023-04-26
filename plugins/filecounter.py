@@ -2,10 +2,11 @@ import pymongo
 from pyrogram import Client, filters
 from pyrogram.types import Message
 
-from info import DATABASE_URI, DATABASE_NAME, CHAT_ID, POST_ID
+from info import DATABASE_URI, DATABASE_NAME, CHAT_ID
 
 myclient = pymongo.MongoClient(DATABASE_URI)
 mydb = myclient[DATABASE_NAME]
+POST_ID = 5
 
 @client.on_message(filters.chat(CHAT_ID) & (filters.document | filters.video | filters.audio | filters.photo | filters.animation))
 async def handle_new_files(_, message: Message):
