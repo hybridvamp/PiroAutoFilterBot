@@ -8,7 +8,7 @@ myclient = pymongo.MongoClient(DATABASE_URI)
 mydb = myclient[DATABASE_NAME]
 POST_ID = 5
 
-@app.on_message(filters.chat(CHAT_ID))
+@Client.on_message(filters.chat(CHAT_ID))
 async def handle_new_files(client, message: Message):
     # Increment the total files count in the database
         mycol = mydb["file_counts"]
