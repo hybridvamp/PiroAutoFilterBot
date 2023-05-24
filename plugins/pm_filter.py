@@ -515,19 +515,34 @@ async def cb_handler(client: Client, query: CallbackQuery):
                             ]
                         )
                     )
-                    hybrid_tg = await query.message.reply_text(
-                        script.FILE_MSG.format(query.from_user.mention, title, size),
-                        parse_mode=enums.ParseMode.HTML,
-                        reply_markup=InlineKeyboardMarkup(
-                            [
-                             [
-                                InlineKeyboardButton("First Click here & Press Join", url=(FILE_FORWARD))
-                           ],[
-                                InlineKeyboardButton('📥 𝖣𝗈𝗐𝗇𝗅𝗈𝖺𝖽 𝖫𝗂𝗇𝗄 📥 ', url = file_send.link)
-                             ]
-                            ]
+                    user = await mycol.find_one({"fsub_userid": query.from_user.id})
+                    if user:
+                        hybrid_tg = await query.message.reply_text(
+                            script.FILE_MSG.format(query.from_user.mention, title, size),
+                            parse_mode=enums.ParseMode.HTML,
+                            reply_markup=InlineKeyboardMarkup(
+                                [
+                                    [
+                                        InlineKeyboardButton("First Click here & Press Join", url=FILE_FORWARD)
+                                    ],
+                                    [
+                                        InlineKeyboardButton("📥 𝖣𝗈𝗐𝗇𝗅𝗈𝖺𝖽 𝖫𝗂𝗇𝗄 📥", url=file_send.link)
+                                    ]
+                                ]
+                            )
                         )
-                    )
+                    else:
+                        hybrid_tg = await query.message.reply_text(
+                            "You have not joined the files channel to use this bot.",
+                            reply_markup=InlineKeyboardMarkup(
+                                [
+                                    [
+                                        InlineKeyboardButton("Join Channel", url=FSUBDB_URL)
+                                    ]
+                                ]
+                            )
+                        )
+
                     if settings['auto_delete']:
                         await asyncio.sleep(300)
                         await hybrid_tg.delete()
@@ -550,19 +565,33 @@ async def cb_handler(client: Client, query: CallbackQuery):
                             ]
                         )
                     )
-                    hybrid_tg = await query.message.reply_text(
-                        script.FILE_MSG.format(query.from_user.mention, title, size),
-                        parse_mode=enums.ParseMode.HTML,
-                        reply_markup=InlineKeyboardMarkup(
-                            [
-                             [
-                                InlineKeyboardButton("First Click here & Press Join", url=(FILE_FORWARD))
-                           ],[
-                                InlineKeyboardButton('📥 𝖣𝗈𝗐𝗇𝗅𝗈𝖺𝖽 𝖫𝗂𝗇𝗄 📥 ', url = file_send.link)
-                             ]
-                            ]
+                    user = await mycol.find_one({"fsub_userid": query.from_user.id})
+                    if user:
+                        hybrid_tg = await query.message.reply_text(
+                            script.FILE_MSG.format(query.from_user.mention, title, size),
+                            parse_mode=enums.ParseMode.HTML,
+                            reply_markup=InlineKeyboardMarkup(
+                                [
+                                    [
+                                        InlineKeyboardButton("First Click here & Press Join", url=FILE_FORWARD)
+                                    ],
+                                    [
+                                        InlineKeyboardButton("📥 𝖣𝗈𝗐𝗇𝗅𝗈𝖺𝖽 𝖫𝗂𝗇𝗄 📥", url=file_send.link)
+                                    ]
+                                ]
+                            )
                         )
-                    )
+                    else:
+                        hybrid_tg = await query.message.reply_text(
+                            "You have not joined the files channel to use this bot.",
+                            reply_markup=InlineKeyboardMarkup(
+                                [
+                                    [
+                                        InlineKeyboardButton("Join Channel", url=FSUBDB_URL)
+                                    ]
+                                ]
+                            )
+                        )
                     if settings['auto_delete']:
                         await asyncio.sleep(300)
                         await hybrid_tg.delete()
@@ -585,19 +614,33 @@ async def cb_handler(client: Client, query: CallbackQuery):
                             ]
                         )
                     )
-                    hybrid_tg = await query.message.reply_text(
-                        script.FILE_MSG.format(query.from_user.mention, title, size),
-                        parse_mode=enums.ParseMode.HTML,
-                        reply_markup=InlineKeyboardMarkup(
-                            [
-                             [
-                                InlineKeyboardButton("First Click here & Press Join", url=(FILE_FORWARD))
-                           ],[
-                                InlineKeyboardButton('📥 𝖣𝗈𝗐𝗇𝗅𝗈𝖺𝖽 𝖫𝗂𝗇𝗄 📥 ', url = file_send.link)
-                             ]
-                            ]
+                    user = await mycol.find_one({"fsub_userid": query.from_user.id})
+                    if user:
+                        hybrid_tg = await query.message.reply_text(
+                            script.FILE_MSG.format(query.from_user.mention, title, size),
+                            parse_mode=enums.ParseMode.HTML,
+                            reply_markup=InlineKeyboardMarkup(
+                                [
+                                    [
+                                        InlineKeyboardButton("First Click here & Press Join", url=FILE_FORWARD)
+                                    ],
+                                    [
+                                        InlineKeyboardButton("📥 𝖣𝗈𝗐𝗇𝗅𝗈𝖺𝖽 𝖫𝗂𝗇𝗄 📥", url=file_send.link)
+                                    ]
+                                ]
+                            )
                         )
-                    )
+                    else:
+                        hybrid_tg = await query.message.reply_text(
+                            "You have not joined the files channel to use this bot.",
+                            reply_markup=InlineKeyboardMarkup(
+                                [
+                                    [
+                                        InlineKeyboardButton("Join Channel", url=FSUBDB_URL)
+                                    ]
+                                ]
+                            )
+                        )
                     if settings['auto_delete']:
                         await asyncio.sleep(300)
                         await hybrid_tg.delete()
