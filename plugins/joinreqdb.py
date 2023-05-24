@@ -9,7 +9,7 @@ mycol = mydb[COLLECTION_NAME]
 
 
 @Client.on_chat_join_request((filters.group | filters.channel) & filters.chat(F_CHATID) if F_CHATID else (filters.group | filters.channel))
-async def handle_join_request(client, message: ChatJoinRequest):
+async def handle_join_request(client, message: types.ChatJoinRequest):
     user_id = message.from_user.id
     
     # Find the user in the database
