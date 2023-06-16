@@ -3,7 +3,6 @@ import re
 import ast
 import math
 import random
-import pymongo
 
 from pyrogram.errors.exceptions.bad_request_400 import MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty
 from Script import script
@@ -11,7 +10,7 @@ import pyrogram
 from database.connections_mdb import active_connection, all_connections, delete_connection, if_active, make_active, \
     make_inactive
 from info import ADMINS, AUTH_CHANNEL, AUTH_USERS, SUPPORT_CHAT_ID, SUPPORT_CHAT, CUSTOM_FILE_CAPTION, PICS, AUTH_GROUPS, P_TTI_SHOW_OFF, NOR_IMG, LOG_CHANNEL, SPELL_IMG, MAX_B_TN, IMDB, \
-    SINGLE_BUTTON, SPELL_CHECK_REPLY, IMDB_TEMPLATE, NO_RESULTS_MSG, MAIN_CHANNEL, FILE_FORWARD, FILE_CHANNEL, FSUBDB_URL, DATABASE_NAME, DATABASE_URI, F_CHATID, COLLECTION_NAME
+    SINGLE_BUTTON, SPELL_CHECK_REPLY, IMDB_TEMPLATE, NO_RESULTS_MSG, MAIN_CHANNEL, FILE_FORWARD, FILE_CHANNEL
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, InputMediaPhoto
 from pyrogram import Client, filters, enums
 from pyrogram.errors import FloodWait, UserIsBlocked, MessageNotModified, PeerIdInvalid
@@ -36,9 +35,6 @@ logger.setLevel(logging.ERROR)
 BUTTONS = {}
 SPELL_CHECK = {}
 
-myclient = pymongo.MongoClient(DATABASE_URI)
-mydb = myclient[DATABASE_NAME]
-mycol = mydb[COLLECTION_NAME]
 
 @Client.on_message(filters.group & filters.text & filters.incoming)
 async def give_filter(client, message):
@@ -112,14 +108,14 @@ async def next_page(bot, query):
         if settings['auto_delete']:
             btn.insert(0, 
             [
-                InlineKeyboardButton('💬 Kerala Chatting 𝖦𝗋𝗈𝗎𝗉', url=f"https://t.me/kerala_tg_vazhakal")
+                InlineKeyboardButton('Fast Download Link Bot', url=f"https://t.me/filetolinkv2_bot")
             ]
             )
 
         else:
             btn.insert(0, 
             [
-                InlineKeyboardButton('💬 Kerala Chatting 𝖦𝗋𝗈𝗎𝗉', url=f"https://t.me/kerala_tg_vazhakal")
+                InlineKeyboardButton('Fast Download Link Bot', url=f"https://t.me/filetolinkv2_bot")
             ]
             )
                 
@@ -130,14 +126,14 @@ async def next_page(bot, query):
         if settings['auto_delete']:
             btn.insert(0, 
             [
-                InlineKeyboardButton('💬 Kerala Chatting 𝖦𝗋𝗈𝗎𝗉', url=f"https://t.me/kerala_tg_vazhakal")
+                InlineKeyboardButton('Fast Download Link Bot', url=f"https://t.me/filetolinkv2_bot")
             ]
             )
 
         else:
             btn.insert(0, 
             [
-                InlineKeyboardButton('💬 Kerala Chatting 𝖦𝗋𝗈𝗎𝗉', url=f"https://t.me/kerala_tg_vazhakal")
+                InlineKeyboardButton('Fast Download Link Bot', url=f"https://t.me/filetolinkv2_bot")
             ]
             )
     try:
@@ -519,34 +515,19 @@ async def cb_handler(client: Client, query: CallbackQuery):
                             ]
                         )
                     )
-                    user = await mycol.find_one({"fsub_userid": query.from_user.id})
-                    if user:
-                        hybrid_tg = await query.message.reply_text(
-                            script.FILE_MSG.format(query.from_user.mention, title, size),
-                            parse_mode=enums.ParseMode.HTML,
-                            reply_markup=InlineKeyboardMarkup(
-                                [
-                                    [
-                                        InlineKeyboardButton("First Click here & Press Join", url=FILE_FORWARD)
-                                    ],
-                                    [
-                                        InlineKeyboardButton("📥 𝖣𝗈𝗐𝗇𝗅𝗈𝖺𝖽 𝖫𝗂𝗇𝗄 📥", url=file_send.link)
-                                    ]
-                                ]
-                            )
+                    hybrid_tg = await query.message.reply_text(
+                        script.FILE_MSG.format(query.from_user.mention, title, size),
+                        parse_mode=enums.ParseMode.HTML,
+                        reply_markup=InlineKeyboardMarkup(
+                            [
+                             [
+                                InlineKeyboardButton("First Click here & Press Join", url=(FILE_FORWARD))
+                           ],[
+                                InlineKeyboardButton('📥 𝖣𝗈𝗐𝗇𝗅𝗈𝖺𝖽 𝖫𝗂𝗇𝗄 📥 ', url = file_send.link)
+                             ]
+                            ]
                         )
-                    else:
-                        hybrid_tg = await query.message.reply_text(
-                            "You have not joined the files channel to use this bot.",
-                            reply_markup=InlineKeyboardMarkup(
-                                [
-                                    [
-                                        InlineKeyboardButton("Join Channel", url=FSUBDB_URL)
-                                    ]
-                                ]
-                            )
-                        )
-
+                    )
                     if settings['auto_delete']:
                         await asyncio.sleep(300)
                         await hybrid_tg.delete()
@@ -569,33 +550,19 @@ async def cb_handler(client: Client, query: CallbackQuery):
                             ]
                         )
                     )
-                    user = await mycol.find_one({"fsub_userid": query.from_user.id})
-                    if user:
-                        hybrid_tg = await query.message.reply_text(
-                            script.FILE_MSG.format(query.from_user.mention, title, size),
-                            parse_mode=enums.ParseMode.HTML,
-                            reply_markup=InlineKeyboardMarkup(
-                                [
-                                    [
-                                        InlineKeyboardButton("First Click here & Press Join", url=FILE_FORWARD)
-                                    ],
-                                    [
-                                        InlineKeyboardButton("📥 𝖣𝗈𝗐𝗇𝗅𝗈𝖺𝖽 𝖫𝗂𝗇𝗄 📥", url=file_send.link)
-                                    ]
-                                ]
-                            )
+                    hybrid_tg = await query.message.reply_text(
+                        script.FILE_MSG.format(query.from_user.mention, title, size),
+                        parse_mode=enums.ParseMode.HTML,
+                        reply_markup=InlineKeyboardMarkup(
+                            [
+                             [
+                                InlineKeyboardButton("First Click here & Press Join", url=(FILE_FORWARD))
+                           ],[
+                                InlineKeyboardButton('📥 𝖣𝗈𝗐𝗇𝗅𝗈𝖺𝖽 𝖫𝗂𝗇𝗄 📥 ', url = file_send.link)
+                             ]
+                            ]
                         )
-                    else:
-                        hybrid_tg = await query.message.reply_text(
-                            "You have not joined the files channel to use this bot.",
-                            reply_markup=InlineKeyboardMarkup(
-                                [
-                                    [
-                                        InlineKeyboardButton("Join Channel", url=FSUBDB_URL)
-                                    ]
-                                ]
-                            )
-                        )
+                    )
                     if settings['auto_delete']:
                         await asyncio.sleep(300)
                         await hybrid_tg.delete()
@@ -618,33 +585,19 @@ async def cb_handler(client: Client, query: CallbackQuery):
                             ]
                         )
                     )
-                    user = await mycol.find_one({"fsub_userid": query.from_user.id})
-                    if user:
-                        hybrid_tg = await query.message.reply_text(
-                            script.FILE_MSG.format(query.from_user.mention, title, size),
-                            parse_mode=enums.ParseMode.HTML,
-                            reply_markup=InlineKeyboardMarkup(
-                                [
-                                    [
-                                        InlineKeyboardButton("First Click here & Press Join", url=FILE_FORWARD)
-                                    ],
-                                    [
-                                        InlineKeyboardButton("📥 𝖣𝗈𝗐𝗇𝗅𝗈𝖺𝖽 𝖫𝗂𝗇𝗄 📥", url=file_send.link)
-                                    ]
-                                ]
-                            )
+                    hybrid_tg = await query.message.reply_text(
+                        script.FILE_MSG.format(query.from_user.mention, title, size),
+                        parse_mode=enums.ParseMode.HTML,
+                        reply_markup=InlineKeyboardMarkup(
+                            [
+                             [
+                                InlineKeyboardButton("First Click here & Press Join", url=(FILE_FORWARD))
+                           ],[
+                                InlineKeyboardButton('📥 𝖣𝗈𝗐𝗇𝗅𝗈𝖺𝖽 𝖫𝗂𝗇𝗄 📥 ', url = file_send.link)
+                             ]
+                            ]
                         )
-                    else:
-                        hybrid_tg = await query.message.reply_text(
-                            "You have not joined the files channel to use this bot.",
-                            reply_markup=InlineKeyboardMarkup(
-                                [
-                                    [
-                                        InlineKeyboardButton("Join Channel", url=FSUBDB_URL)
-                                    ]
-                                ]
-                            )
-                        )
+                    )
                     if settings['auto_delete']:
                         await asyncio.sleep(300)
                         await hybrid_tg.delete()
@@ -1387,14 +1340,14 @@ async def auto_filter(client, msg, spoll=False):
         if settings['auto_delete']:
             btn.insert(0, 
             [
-                InlineKeyboardButton('💬 Kerala Chatting 𝖦𝗋𝗈𝗎𝗉', url=f"https://t.me/kerala_tg_vazhakal")
+                InlineKeyboardButton('Fast Download Link Bot', url=f"https://t.me/filetolinkv2_bot")
             ]
             )
 
         else:
             btn.insert(0, 
             [
-                InlineKeyboardButton('💬 Kerala Chatting 𝖦𝗋𝗈𝗎𝗉', url=f"https://t.me/kerala_tg_vazhakal")
+                InlineKeyboardButton('Fast Download Link Bot', url=f"https://t.me/filetolinkv2_bot")
             ]
             )
                 
@@ -1405,14 +1358,14 @@ async def auto_filter(client, msg, spoll=False):
         if settings['auto_delete']:
             btn.insert(0, 
             [
-                InlineKeyboardButton('💬 Kerala Chatting 𝖦𝗋𝗈𝗎𝗉', url=f"https://t.me/kerala_tg_vazhakal")
+                InlineKeyboardButton('Fast Download Link Bot', url=f"https://t.me/filetolinkv2_bot")
             ]
             )
 
         else:
             btn.insert(0, 
             [
-                InlineKeyboardButton('💬 Kerala Chatting 𝖦𝗋𝗈𝗎𝗉', url=f"https://t.me/kerala_tg_vazhakal")
+                InlineKeyboardButton('Fast Download Link Bot', url=f"https://t.me/filetolinkv2_bot")
             ]
             )
 
