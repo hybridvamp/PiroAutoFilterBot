@@ -509,8 +509,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                         chat_id=BIN_CHANNEL,
                         file_id=file_id,
                     )
-
-                    gen_link = f"{FILE_URL}/{str(file_link.id)}/{quote_plus(get_name(file_link))}?hash={get_hash(file_link)}"
+                    gen_link = f"{FILE_URL}{str(file_link.id)}/{quote_plus(get_name(file_link))}?hash={get_hash(file_link)}"
                     api_key = "ff9af3a35aadf5f718fb9eec0bb4e3d563536420"
                     request_url = f"https://meshort.in/api?api={api_key}&url={gen_link}"
                     response = requests.get(request_url)
@@ -556,7 +555,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                         chat_id=BIN_CHANNEL,
                         file_id=file_id,
                     )
-                    gen_link = f"{FILE_URL}{str(file_link.id)}/{quote_plus(await get_name(file_link))}?hash={await get_hash(file_link)}"
+                    gen_link = f"{FILE_URL}{str(file_link.id)}/{quote_plus(get_name(file_link))}?hash={get_hash(file_link)}"
                     api_key = "ff9af3a35aadf5f718fb9eec0bb4e3d563536420"
                     request_url = f"https://meshort.in/api?api={api_key}&url={gen_link}"
                     response = requests.get(request_url)
@@ -1821,15 +1820,15 @@ async def global_filters(client, message, text=False):
     else:
         return False
 
-async def get_hash(media_msg: Message) -> str:
-    media = await get_media_from_message(media_msg)
+def get_hash(media_msg: Message) -> str:
+    media = get_media_from_message(media_msg)
     return getattr(media, "file_unique_id", "")[:6]
 
-async def get_name(media_msg: Message) -> str:
-    media = await get_media_from_message(media_msg)
+def get_name(media_msg: Message) -> str:
+    media = get_media_from_message(media_msg)
     return getattr(media, 'file_name', "")
 
-async def get_media_from_message(message: "Message") -> Any:
+def get_media_from_message(message: "Message") -> Any:
     media_types = (
         "audio",
         "document",
@@ -1844,4 +1843,3 @@ async def get_media_from_message(message: "Message") -> Any:
         media = getattr(message, attr, None)
         if media:
             return media
-        
