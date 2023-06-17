@@ -3,18 +3,15 @@ import re
 import ast
 import math
 import random
-import requests
 
-from typing import Any
-from urllib.parse import quote_plus
 from pyrogram.errors.exceptions.bad_request_400 import MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty
 from Script import script
 import pyrogram
 from database.connections_mdb import active_connection, all_connections, delete_connection, if_active, make_active, \
     make_inactive
 from info import ADMINS, AUTH_CHANNEL, AUTH_USERS, SUPPORT_CHAT_ID, SUPPORT_CHAT, CUSTOM_FILE_CAPTION, PICS, AUTH_GROUPS, P_TTI_SHOW_OFF, NOR_IMG, LOG_CHANNEL, SPELL_IMG, MAX_B_TN, IMDB, \
-    SINGLE_BUTTON, SPELL_CHECK_REPLY, IMDB_TEMPLATE, NO_RESULTS_MSG, MAIN_CHANNEL, FILE_FORWARD, FILE_CHANNEL, BIN_CHANNEL, FILE_URL
-from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, InputMediaPhoto
+    SINGLE_BUTTON, SPELL_CHECK_REPLY, IMDB_TEMPLATE, NO_RESULTS_MSG, MAIN_CHANNEL, FILE_FORWARD, FILE_CHANNEL
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, InputMediaPhoto
 from pyrogram import Client, filters, enums
 from pyrogram.errors import FloodWait, UserIsBlocked, MessageNotModified, PeerIdInvalid
 from utils import get_size, is_subscribed, get_poster, search_gagala, temp, get_settings, save_group_settings
@@ -48,19 +45,28 @@ async def give_filter(client, message):
         settings = await get_settings(message.chat.id)
         try:
             if settings['auto_ffilter']:
+                reply_message = await message.reply("🔍 Processing.....")
                 await auto_filter(client, message)
+                await asyncio.sleep(10)
+                await reply_message.delete()
         except KeyError:
             grpid = await active_connection(str(message.from_user.id))
             await save_group_settings(grpid, 'auto_ffilter', True)
             settings = await get_settings(message.chat.id)
             if settings['auto_ffilter']:
+                reply_message = await message.reply("🔍 Processing.....")
                 await auto_filter(client, message) 
+                await asyncio.sleep(10)
+                await reply_message.delete()
 
 @Client.on_message(filters.private & filters.text & filters.incoming)
 async def pv_filter(client, message):
     kd = await global_filters(client, message)
     if kd == False:
+        reply_message = await message.reply("🔍 Processing.....")
         await auto_filter(client, message)
+        await asyncio.sleep(10)
+        await reply_message.delete()
 
 @Client.on_callback_query(filters.regex(r"^next"))
 async def next_page(bot, query):
@@ -505,26 +511,15 @@ async def cb_handler(client: Client, query: CallbackQuery):
         try:
             if AUTH_CHANNEL and not await is_subscribed(client, query):
                 if clicked == clicked:
-                    file_link = await client.send_cached_media(
-                        chat_id=BIN_CHANNEL,
-                        file_id=file_id,
-                    )
-                    gen_link = f"{FILE_URL}{str(file_link.id)}/{quote_plus(get_name(file_link))}?hash={get_hash(file_link)}"
-                    api_key = "ff9af3a35aadf5f718fb9eec0bb4e3d563536420"
-                    request_url = f"https://meshort.in/api?api={api_key}&url={gen_link}"
-                    response = requests.get(request_url)
-                    response_json = response.json()
-                    shortened_url = response_json.get('shortenedUrl')
-
                     file_send=await client.send_cached_media(
                         chat_id=FILE_CHANNEL,
                         file_id=file_id,
-                        caption=script.CHANNEL_CAP.format(query.from_user.mention, title, shortened_url, query.message.chat.title),
+                        caption=script.CHANNEL_CAP.format(query.from_user.mention, title, query.message.chat.title),
                         protect_content=True if ident == "filep" else False,
                         reply_markup=InlineKeyboardMarkup(
                             [
                                 [
-                                    InlineKeyboardButton("⚡ Fast Download", url=(shortened_url))
+                                    InlineKeyboardButton("🔥 ᴄʜᴀɴɴᴇʟ 🔥", url=(MAIN_CHANNEL))
                                 ]
                             ]
                         )
@@ -551,26 +546,15 @@ async def cb_handler(client: Client, query: CallbackQuery):
                     await query.answer(f"𝖧𝖾𝗒 {query.from_user.first_name}, 𝖳𝗁𝗂𝗌 𝗂𝗌 𝗇𝗈𝗍 𝗒𝗈𝗎𝗋 𝗋𝖾𝗊𝗎𝖾𝗌𝗍 !", show_alert=True)
             elif settings['botpm']:
                 if clicked == clicked:
-                    file_link = await client.send_cached_media(
-                        chat_id=BIN_CHANNEL,
-                        file_id=file_id,
-                    )
-                    gen_link = f"{FILE_URL}{str(file_link.id)}/{quote_plus(get_name(file_link))}?hash={get_hash(file_link)}"
-                    api_key = "ff9af3a35aadf5f718fb9eec0bb4e3d563536420"
-                    request_url = f"https://meshort.in/api?api={api_key}&url={gen_link}"
-                    response = requests.get(request_url)
-                    response_json = response.json()
-                    shortened_url = response_json.get('shortenedUrl')
-
                     file_send=await client.send_cached_media(
                         chat_id=FILE_CHANNEL,
                         file_id=file_id,
-                        caption=script.CHANNEL_CAP.format(query.from_user.mention, title, shortened_url, query.message.chat.title),
+                        caption=script.CHANNEL_CAP.format(query.from_user.mention, title, query.message.chat.title),
                         protect_content=True if ident == "filep" else False,
                         reply_markup=InlineKeyboardMarkup(
                             [
                                 [
-                                    InlineKeyboardButton("⚡ Fast Download", url=(shortened_url))
+                                    InlineKeyboardButton("🔥 ᴄʜᴀɴɴᴇʟ 🔥", url=(MAIN_CHANNEL))
                                 ]
                             ]
                         )
@@ -597,26 +581,15 @@ async def cb_handler(client: Client, query: CallbackQuery):
                     await query.answer(f"𝖧𝖾𝗒 {query.from_user.first_name}, 𝖳𝗁𝗂𝗌 𝗂𝗌 𝗇𝗈𝗍 𝗒𝗈𝗎𝗋 𝗋𝖾𝗊𝗎𝖾𝗌𝗍 !", show_alert=True)
             else:
                 if clicked == clicked:
-                    file_link = await client.send_cached_media(
-                        chat_id=BIN_CHANNEL,
-                        file_id=file_id,
-                    )
-                    gen_link = f"{FILE_URL}{str(file_link.id)}/{quote_plus(get_name(file_link))}?hash={get_hash(file_link)}"
-                    api_key = "ff9af3a35aadf5f718fb9eec0bb4e3d563536420"
-                    request_url = f"https://meshort.in/api?api={api_key}&url={gen_link}"
-                    response = requests.get(request_url)
-                    response_json = response.json()
-                    shortened_url = response_json.get('shortenedUrl')
-
                     file_send=await client.send_cached_media(
                         chat_id=FILE_CHANNEL,
                         file_id=file_id,
-                        caption=script.CHANNEL_CAP.format(query.from_user.mention, title, shortened_url, query.message.chat.title),
+                        caption=script.CHANNEL_CAP.format(query.from_user.mention, title, query.message.chat.title),
                         protect_content=True if ident == "filep" else False,
                         reply_markup=InlineKeyboardMarkup(
                             [
                                 [
-                                    InlineKeyboardButton("⚡ Fast Download", url=(shortened_url))
+                                    InlineKeyboardButton("🔥 ᴄʜᴀɴɴᴇʟ 🔥", url=(MAIN_CHANNEL))
                                 ]
                             ]
                         )
@@ -1819,6 +1792,8 @@ async def global_filters(client, message, text=False):
                 break
     else:
         return False
+<<<<<<< HEAD
+=======
 
 def get_hash(media_msg: Message) -> str:
     media = get_media_from_message(media_msg)
@@ -1843,3 +1818,4 @@ def get_media_from_message(message: "Message") -> Any:
         media = getattr(message, attr, None)
         if media:
             return media
+>>>>>>> 36d25fd6a2ed9e8e1e382a066ba8a108f8e03f62
