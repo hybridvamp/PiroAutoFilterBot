@@ -75,6 +75,8 @@ PUBLIC_FILE_STORE = is_enabled((environ.get('PUBLIC_FILE_STORE', "False")), True
 MAIN_CHANNEL = environ.get('MAIN_CHANNEL', "https://t.me/HYBRID_Movies")
 FILE_FORWARD = environ.get('FILE_FORWARD', "https://t.me/+vatczfqeSQE2MDM1")
 FILE_CHANNEL = int(environ.get('FILE_CHANNEL', 0))
+BIN_CHANNEL = int(environ.get('BIN_CHANNEL', '-1001665079841'))
+FILE_URL = environ.get('FILE_URL', "https://files.meshort.in:8000")
 
 #Auto approve 
 #In private group or channel must enable request admin approval 

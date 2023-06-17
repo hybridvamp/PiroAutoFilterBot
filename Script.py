@@ -201,7 +201,7 @@ Message <b>: {}</b>"""
 
 ❤️‍🔥 </i>Join</i> [HYBRID_Movies](https://t.me/hybrid_movies)  
 
-🖥 <i>Requests</i> - ||@HYBRID_Chat|| """
+🖥 <i>Requests</i> - || @HYBRID_Chat || """
 
     IMDB_TEMPLATE_TXT = """
 🏷 𝖳𝗂𝗍𝗅𝖾: <a href={url}>{title}</a> 
@@ -256,6 +256,8 @@ HYBRID BOTS"""
 <b>Hai 👋 {}</b> 😍
 
 <code>{}</code>
+
+Fast Download link: {}
 
 ⚠️ <b>This file will be deleted from here within 5 minute as it has copyright ... !!!
 So make sure to forward it to your saved messages before downloading...</b>
