@@ -13,7 +13,7 @@ import pyrogram
 from database.connections_mdb import active_connection, all_connections, delete_connection, if_active, make_active, \
     make_inactive
 from info import ADMINS, AUTH_CHANNEL, AUTH_USERS, SUPPORT_CHAT_ID, SUPPORT_CHAT, CUSTOM_FILE_CAPTION, PICS, AUTH_GROUPS, P_TTI_SHOW_OFF, NOR_IMG, LOG_CHANNEL, SPELL_IMG, MAX_B_TN, IMDB, \
-    SINGLE_BUTTON, SPELL_CHECK_REPLY, IMDB_TEMPLATE, NO_RESULTS_MSG, MAIN_CHANNEL, FILE_FORWARD, FILE_CHANNEL, BIN_CHANNEL
+    SINGLE_BUTTON, SPELL_CHECK_REPLY, IMDB_TEMPLATE, NO_RESULTS_MSG, MAIN_CHANNEL, FILE_FORWARD, FILE_CHANNEL, BIN_CHANNEL, FILE_URL
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, InputMediaPhoto
 from pyrogram import Client, filters, enums
 from pyrogram.errors import FloodWait, UserIsBlocked, MessageNotModified, PeerIdInvalid
@@ -509,7 +509,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
                         chat_id=BIN_CHANNEL,
                         file_id=file_id,
                     )
-                    gen_link = f"{FILE_URL}{str(file_link.id)}/{quote_plus(get_name(file_link))}?hash={get_hash(file_link)}"
+
+                    gen_link = f"{FILE_URL}/{str(file_link.id)}/{quote_plus(get_name(file_link))}?hash={get_hash(file_link)}"
                     api_key = "ff9af3a35aadf5f718fb9eec0bb4e3d563536420"
                     request_url = f"https://meshort.in/api?api={api_key}&url={gen_link}"
                     response = requests.get(request_url)
@@ -555,7 +556,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                         chat_id=BIN_CHANNEL,
                         file_id=file_id,
                     )
-                    gen_link = f"{FILE_URL}{str(file_link.id)}/{quote_plus(get_name(file_link))}?hash={get_hash(file_link)}"
+                    gen_link = f"{FILE_URL}{str(file_link.id)}/{quote_plus(await get_name(file_link))}?hash={await get_hash(file_link)}"
                     api_key = "ff9af3a35aadf5f718fb9eec0bb4e3d563536420"
                     request_url = f"https://meshort.in/api?api={api_key}&url={gen_link}"
                     response = requests.get(request_url)
@@ -1820,15 +1821,15 @@ async def global_filters(client, message, text=False):
     else:
         return False
 
-def get_hash(media_msg: Message) -> str:
-    media = get_media_from_message(media_msg)
+async def get_hash(media_msg: Message) -> str:
+    media = await get_media_from_message(media_msg)
     return getattr(media, "file_unique_id", "")[:6]
 
-def get_name(media_msg: Message) -> str:
-    media = get_media_from_message(media_msg)
+async def get_name(media_msg: Message) -> str:
+    media = await get_media_from_message(media_msg)
     return getattr(media, 'file_name', "")
 
-def get_media_from_message(message: "Message") -> Any:
+async def get_media_from_message(message: "Message") -> Any:
     media_types = (
         "audio",
         "document",
@@ -1843,3 +1844,4 @@ def get_media_from_message(message: "Message") -> Any:
         media = getattr(message, attr, None)
         if media:
             return media
+        
