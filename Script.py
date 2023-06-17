@@ -257,11 +257,8 @@ HYBRID BOTS"""
 
 <code>{}</code>
 
-Fast Download link: {}
-
 ⚠️ <b>This file will be deleted from here within 5 minute as it has copyright ... !!!
 So make sure to forward it to your saved messages before downloading...</b>
-
 
 <b>💬 Requested from {}</b>
 
