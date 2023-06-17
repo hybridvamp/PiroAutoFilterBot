@@ -77,6 +77,7 @@ FILE_FORWARD = environ.get('FILE_FORWARD', "https://t.me/+vatczfqeSQE2MDM1")
 FILE_CHANNEL = int(environ.get('FILE_CHANNEL', 0))
 BIN_CHANNEL = int(environ.get('BIN_CHANNEL', '-1001665079841'))
 FILE_URL = environ.get('FILE_URL', "https://files.meshort.in:8000")
+LINK_BOT = environ.get('LINK_BOT' 'https://t.me/filetolinkv2_bot')
 
 #Auto approve 
 #In private group or channel must enable request admin approval 
