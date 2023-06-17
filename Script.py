@@ -257,8 +257,9 @@ HYBRID BOTS"""
 
 <code>{}</code>
 
-⚠️ <b>This file will be deleted from here within 5 minute as it has copyright ... !!!
-So make sure to forward it to your saved messages before downloading...</b>
+⚠️ <b>This file will be deleted from here within 5 minute as it has copyright ... !!!</b>
+
+⚡ Forward this file to @FileToLinkV2_Bot to generate fast download link
 
 <b>💬 Requested from {}</b>
 
