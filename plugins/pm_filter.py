@@ -45,28 +45,19 @@ async def give_filter(client, message):
         settings = await get_settings(message.chat.id)
         try:
             if settings['auto_ffilter']:
-                reply_message = await message.reply("🔍 Processing.....")
                 await auto_filter(client, message)
-                await asyncio.sleep(10)
-                await reply_message.delete()
         except KeyError:
             grpid = await active_connection(str(message.from_user.id))
             await save_group_settings(grpid, 'auto_ffilter', True)
             settings = await get_settings(message.chat.id)
             if settings['auto_ffilter']:
-                reply_message = await message.reply("🔍 Processing.....")
                 await auto_filter(client, message) 
-                await asyncio.sleep(10)
-                await reply_message.delete()
 
 @Client.on_message(filters.private & filters.text & filters.incoming)
 async def pv_filter(client, message):
     kd = await global_filters(client, message)
     if kd == False:
-        reply_message = await message.reply("🔍 Processing.....")
         await auto_filter(client, message)
-        await asyncio.sleep(10)
-        await reply_message.delete()
 
 @Client.on_callback_query(filters.regex(r"^next"))
 async def next_page(bot, query):
@@ -1296,6 +1287,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
 
     
 async def auto_filter(client, msg, spoll=False):
+    reply_message = await msg.reply("`🔍 Processing...`")
     reqstr1 = msg.from_user.id if msg.from_user else 0
     reqstr = await client.get_users(reqstr1)
     if not spoll:
@@ -1458,6 +1450,7 @@ async def auto_filter(client, msg, spoll=False):
                         await asyncio.sleep(300)
                         await hehe.delete()
                         await message.delete()
+                        await reply_message.delete()
                 except KeyError:
                     grpid = await active_connection(str(message.from_user.id))
                     await save_group_settings(grpid, 'auto_delete', True)
@@ -1466,6 +1459,7 @@ async def auto_filter(client, msg, spoll=False):
                         await asyncio.sleep(300)
                         await hehe.delete()
                         await message.delete()
+                        await reply_message.delete()
         except (MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty):
             if message.chat.id == SUPPORT_CHAT_ID:
                 await message.reply_text(f"<b>👋 𝖧𝖾𝗒 {message.from_user.mention} \n📁 {str(total_results)} 𝖱𝖾𝗌𝗎𝗅𝗍𝗌 𝖺𝗋𝖾 𝖿𝗈𝗎𝗇𝖽 𝖿𝗈𝗋 𝗒𝗈𝗎𝗋 𝗊𝗎𝖾𝗋𝗒 {search}.\n\nKindly ask movies and series here ⬇\n@hybrid_movie_group</b>")
@@ -1478,6 +1472,7 @@ async def auto_filter(client, msg, spoll=False):
                         await asyncio.sleep(300)
                         await hmm.delete()
                         await message.delete()
+                        await reply_message.delete()
                 except KeyError:
                     grpid = await active_connection(str(message.from_user.id))
                     await save_group_settings(grpid, 'auto_delete', True)
@@ -1486,6 +1481,7 @@ async def auto_filter(client, msg, spoll=False):
                         await asyncio.sleep(300)
                         await hmm.delete()
                         await message.delete()
+                        await reply_message.delete()
         except Exception as e:
             if message.chat.id == SUPPORT_CHAT_ID:
                 await message.reply_text(f"<b>👋 𝖧𝖾𝗒 {message.from_user.mention} \n📁 {str(total_results)} 𝖱𝖾𝗌𝗎𝗅𝗍𝗌 𝖺𝗋𝖾 𝖿𝗈𝗎𝗇𝖽 𝖿𝗈𝗋 𝗒𝗈𝗎𝗋 𝗊𝗎𝖾𝗋𝗒 {search}.\n\nKindly ask movies and series here ⬇\n@hybrid_movie_group</b>")
@@ -1497,6 +1493,7 @@ async def auto_filter(client, msg, spoll=False):
                         await asyncio.sleep(300)
                         await fek.delete()
                         await message.delete()
+                        await reply_message.delete()
                 except KeyError:
                     grpid = await active_connection(str(message.from_user.id))
                     await save_group_settings(grpid, 'auto_delete', True)
@@ -1505,6 +1502,7 @@ async def auto_filter(client, msg, spoll=False):
                         await asyncio.sleep(300)
                         await fek.delete()
                         await message.delete()
+                        await reply_message.delete()
     else:
         if message.chat.id == SUPPORT_CHAT_ID:
             await message.reply_text(f"<b>👋 𝖧𝖾𝗒 {message.from_user.mention} \n📁 {str(total_results)} 𝖱𝖾𝗌𝗎𝗅𝗍𝗌 𝖺𝗋𝖾 𝖿𝗈𝗎𝗇𝖽 𝖿𝗈𝗋 𝗒𝗈𝗎𝗋 𝗊𝗎𝖾𝗋𝗒 {search}.\n\nKindly ask movies and series here ⬇\n@hybrid_movie_group</b>")
@@ -1515,6 +1513,7 @@ async def auto_filter(client, msg, spoll=False):
                     await asyncio.sleep(300)
                     await fuk.delete()
                     await message.delete()
+                    await reply_message.delete()
             except KeyError:
                 grpid = await active_connection(str(message.from_user.id))
                 await save_group_settings(grpid, 'auto_delete', True)
@@ -1523,6 +1522,7 @@ async def auto_filter(client, msg, spoll=False):
                     await asyncio.sleep(300)
                     await fuk.delete()
                     await message.delete()
+                    await reply_message.delete()
     if spoll:
         await msg.message.delete()
 
