@@ -18,6 +18,7 @@ from database.users_chats_db import db
 from bs4 import BeautifulSoup
 import requests
 import aiohttp
+from database.join_reqs import JoinReqs as db2
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
