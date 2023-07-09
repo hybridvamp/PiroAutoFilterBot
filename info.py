@@ -87,7 +87,7 @@ FSUBDB_URL = environ.get('FSUBDB_URL', "https://t.me/+vatczfqeSQE2MDM1")
 TEXT = environ.get("APPROVED_WELCOME_TEXT", "Hello {mention}\nWelcome To {title}\n\nYour request has been approved\nPress /start to activate the bot")
 APPROVED = environ.get("APPROVED_WELCOME", "on").lower()
 REQ_CHANNEL = environ.get("REQ_CHANNEL", True)
-REQ_CHANNEL = int(REQ_CHANNEL) if REQ_CHANNEL and id_pattern.search(REQ_CHANNEL) else False
+REQ_CHANNEL = int(REQ_CHANNEL) #if REQ_CHANNEL and id_pattern.search(REQ_CHANNEL) else False
 JOIN_REQS_DB = environ.get("JOIN_REQS_DB", DATABASE_URI)
 
 LOG_STR = "Current Cusomized Configurations are:-\n"
