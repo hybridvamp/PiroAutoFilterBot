@@ -89,6 +89,7 @@ APPROVED = environ.get("APPROVED_WELCOME", "on").lower()
 REQ_CHANNEL = environ.get("REQ_CHANNEL", True)
 REQ_CHANNEL = int(REQ_CHANNEL) #if REQ_CHANNEL and id_pattern.search(REQ_CHANNEL) else False
 JOIN_REQS_DB = environ.get("JOIN_REQS_DB", DATABASE_URI)
+POST_ID = int(environ.get('POST_ID', 5))
 
 LOG_STR = "Current Cusomized Configurations are:-\n"
 LOG_STR += ("IMDB Results are enabled, Bot will be showing imdb details for you queries.\n" if IMDB else "IMBD Results are disabled.\n")

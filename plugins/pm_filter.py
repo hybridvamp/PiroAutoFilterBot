@@ -12,7 +12,7 @@ from pyrogram.errors.exceptions.bad_request_400 import MediaEmpty, PhotoInvalidD
 from pyrogram.errors import FloodWait, UserIsBlocked, MessageNotModified, PeerIdInvalid
 from Script import script
 from info import ADMINS, AUTH_CHANNEL, AUTH_USERS, SUPPORT_CHAT_ID, SUPPORT_CHAT, CUSTOM_FILE_CAPTION, PICS, AUTH_GROUPS, P_TTI_SHOW_OFF, NOR_IMG, LOG_CHANNEL, SPELL_IMG, MAX_B_TN, IMDB, \
-    SINGLE_BUTTON, SPELL_CHECK_REPLY, IMDB_TEMPLATE, NO_RESULTS_MSG, MAIN_CHANNEL, FILE_FORWARD, FILE_CHANNEL
+    SINGLE_BUTTON, SPELL_CHECK_REPLY, IMDB_TEMPLATE, NO_RESULTS_MSG, MAIN_CHANNEL, FILE_FORWARD, FILE_CHANNEL, DATABASE_URI, DATABASE_NAME
 from utils import get_size, is_subscribed, get_poster, search_gagala, temp, get_settings, save_group_settings
 from database.connections_mdb import active_connection, all_connections, delete_connection, if_active, make_active, \
     make_inactive
@@ -32,6 +32,11 @@ from database.gfilters_mdb import (
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.ERROR)
+
+
+myclient = pymongo.MongoClient(DATABASE_URI)
+mydb = myclient[DATABASE_NAME]
+
 
 BUTTONS = {}
 SPELL_CHECK = {}
@@ -517,6 +522,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                             ]
                         )
                     )
+                    await update_file_count()
                     hybrid_tg = await query.message.reply_text(
                         script.FILE_MSG.format(query.from_user.mention, title, size),
                         parse_mode=enums.ParseMode.HTML,
@@ -552,6 +558,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                             ]
                         )
                     )
+                    await update_file_count()
                     hybrid_tg = await query.message.reply_text(
                         script.FILE_MSG.format(query.from_user.mention, title, size),
                         parse_mode=enums.ParseMode.HTML,
@@ -587,6 +594,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                             ]
                         )
                     )
+                    await update_file_count()
                     hybrid_tg = await query.message.reply_text(
                         script.FILE_MSG.format(query.from_user.mention, title, size),
                         parse_mode=enums.ParseMode.HTML,
@@ -1803,3 +1811,24 @@ async def global_filters(client, message, text=False):
                 break
     else:
         return False
+
+
+async def update_file_count(client):
+    if POST_ID:   
+        mycol = mydb["file_counts"]
+        myquery = {"_id": "total_files_sent"}
+        newvalues = {"$inc": {"count": 1}}
+        mycol.update_one(myquery, newvalues, upsert=True)
+                        
+        # Get the current total files count from the database
+        count = mycol.find_one(myquery)["count"]
+                                    
+        # Edit the post in the chat with the new total files count
+        await client.edit_message_text(
+            chat_id=FILE_CHANNEL,
+            message_id=POST_ID,
+            text = f"Total files sent: `{count}`"
+        )
+        print(f"Updated file sent count to {count}") 
+    else:
+        pass
