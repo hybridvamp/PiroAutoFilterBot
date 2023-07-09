@@ -523,7 +523,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                             ]
                         )
                     )
-                    await update_file_count()
+                    #await update_file_count()
                     hybrid_tg = await query.message.reply_text(
                         script.FILE_MSG.format(query.from_user.mention, title, size),
                         parse_mode=enums.ParseMode.HTML,
@@ -559,7 +559,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                             ]
                         )
                     )
-                    await update_file_count()
+                    #await update_file_count()
                     hybrid_tg = await query.message.reply_text(
                         script.FILE_MSG.format(query.from_user.mention, title, size),
                         parse_mode=enums.ParseMode.HTML,
@@ -595,7 +595,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                             ]
                         )
                     )
-                    await update_file_count()
+                    #await update_file_count()
                     hybrid_tg = await query.message.reply_text(
                         script.FILE_MSG.format(query.from_user.mention, title, size),
                         parse_mode=enums.ParseMode.HTML,
