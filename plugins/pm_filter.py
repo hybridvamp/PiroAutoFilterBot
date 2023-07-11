@@ -1301,7 +1301,6 @@ async def auto_filter(client, msg, spoll=False):
     reply_message = await msg.reply("`🔍 Processing...`")
     reqstr1 = msg.from_user.id if msg.from_user else 0
     reqstr = await client.get_users(reqstr1)
-    await reply_message.delete()
     if not spoll:
         message = msg
         settings = await get_settings(message.chat.id)
@@ -1325,6 +1324,7 @@ async def auto_filter(client, msg, spoll=False):
         message = msg.message.reply_to_message  # msg will be callback query
         search, files, offset, total_results = spoll
     pre = 'filep' if settings['file_secure'] else 'file'
+    await reply_message.delete()
     if settings["button"]:
         btn = [
             [
