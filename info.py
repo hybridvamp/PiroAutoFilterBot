@@ -81,7 +81,7 @@ LINK_BOT = environ.get('LINK_BOT' 'https://t.me/filetolinkv2_bot')
 
 #Auto approve 
 #In private group or channel must enable request admin approval 
-CHAT_ID = int(environ.get('FILE_CHANNEL', 0)) #[int(app_chat_id) if id_pattern.search(app_chat_id) else app_chat_id for app_chat_id in environ.get('CHAT_ID', '0').split()]
+CHAT_ID = int(environ.get('CHAT_ID', 0)) #[int(app_chat_id) if id_pattern.search(app_chat_id) else app_chat_id for app_chat_id in environ.get('CHAT_ID', '0').split()]
 F_CHATID = int(environ.get('F_CHATID', 0))
 FSUBDB_URL = environ.get('FSUBDB_URL', "https://t.me/+vatczfqeSQE2MDM1")
 TEXT = environ.get("APPROVED_WELCOME_TEXT", "Hello {mention}\nWelcome To {title}\n\nYour request has been approved\nPress /start to activate the bot")
