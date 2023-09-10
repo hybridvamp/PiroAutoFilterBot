@@ -257,11 +257,7 @@ HYBRID BOTS"""
 
 <code>{}</code>
 
-⚠️ <b>This file will be deleted from here within 5 minute as it has copyright ... !!!</b>
-
 ⚡ Forward this file to @FileToLinkV2_Bot to generate fast download link
-
-<b>💬 Requested from {}</b>
 
 <b>©️ Powered by @HYBRID_Bots</b>
 """

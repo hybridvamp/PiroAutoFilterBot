@@ -514,7 +514,18 @@ async def cb_handler(client: Client, query: CallbackQuery):
                         chat_id=FILE_CHANNEL,
                         file_id=file_id,
                         caption=script.CHANNEL_CAP.format(query.from_user.mention, title, query.message.chat.title),
-                        protect_content=True if ident == "filep" else False
+                        protect_content=True if ident == "filep" else False,
+                        reply_markup=InlineKeyboardMarkup(
+                            [
+                                [
+                                    InlineKeyboardButton(f'🇮🇳 Mᴀʟ', 'fmal'),
+                                    InlineKeyboardButton(f'🇮🇳 Tᴀᴍ', 'ftam'),
+                                    InlineKeyboardButton(f'🇮🇳 Hɪɴ', 'fhin')
+                                ], [
+                                InlineKeyboardButton("📍 ᴄʜᴀɴɴᴇʟ 📍", url=(MAIN_CHANNEL))
+                            ]
+                            ]
+                        )
                     )
                     #await update_file_count()
                     hybrid_tg = await query.message.reply_text(
@@ -543,7 +554,18 @@ async def cb_handler(client: Client, query: CallbackQuery):
                         chat_id=FILE_CHANNEL,
                         file_id=file_id,
                         caption=script.CHANNEL_CAP.format(query.from_user.mention, title, query.message.chat.title),
-                        protect_content=True if ident == "filep" else False
+                        protect_content=True if ident == "filep" else False,
+                        reply_markup=InlineKeyboardMarkup(
+                            [
+                                [
+                                    InlineKeyboardButton(f'🇮🇳 Mᴀʟ', 'fmal'),
+                                    InlineKeyboardButton(f'🇮🇳 Tᴀᴍ', 'ftam'),
+                                    InlineKeyboardButton(f'🇮🇳 Hɪɴ', 'fhin')
+                                ], [
+                                InlineKeyboardButton("📍 ᴄʜᴀɴɴᴇʟ 📍", url=(MAIN_CHANNEL))
+                            ]
+                            ]
+                        )
                     )
                     #await update_file_count()
                     hybrid_tg = await query.message.reply_text(
@@ -572,7 +594,18 @@ async def cb_handler(client: Client, query: CallbackQuery):
                         chat_id=FILE_CHANNEL,
                         file_id=file_id,
                         caption=script.CHANNEL_CAP.format(query.from_user.mention, title, query.message.chat.title),
-                        protect_content=True if ident == "filep" else False
+                        protect_content=True if ident == "filep" else False,
+                        reply_markup=InlineKeyboardMarkup(
+                            [
+                                [
+                                    InlineKeyboardButton(f'🇮🇳 Mᴀʟ', 'fmal'),
+                                    InlineKeyboardButton(f'🇮🇳 Tᴀᴍ', 'ftam'),
+                                    InlineKeyboardButton(f'🇮🇳 Hɪɴ', 'fhin')
+                                ], [
+                                InlineKeyboardButton("📍 ᴄʜᴀɴɴᴇʟ 📍", url=(MAIN_CHANNEL))
+                            ]
+                            ]
+                        )
                     )
                     #await update_file_count()
                     hybrid_tg = await query.message.reply_text(
@@ -908,6 +941,21 @@ async def cb_handler(client: Client, query: CallbackQuery):
     
     elif query.data == 'tips':
         await query.answer("𝖳𝗁𝗂𝗌 𝖬𝖾𝗌𝗌𝖺𝗀𝖾 𝖶𝗂𝗅𝗅 𝖡𝖾 𝖣𝖾𝗅𝖾𝗍𝖾𝖽 𝖠𝖿𝗍𝖾𝗋 5 𝖬𝗂𝗇𝗎𝗍𝖾𝗌 𝗍𝗈 𝖯𝗋𝖾𝗏𝖾𝗇𝗍 𝖢𝗈𝗉𝗒𝗋𝗂𝗀𝗁𝗍 !\n\n𝖳𝗁𝖺𝗇𝗄 𝖸𝗈𝗎 𝖥𝗈𝗋 𝖴𝗌𝗂𝗇𝗀 𝖬𝖾 😊\n\n\n𝖯𝗈𝗐𝖾𝗋𝖾𝖽 𝖡𝗒 𝖯𝖨𝖱𝖮", True)
+
+    elif query.data == "fmal":
+        await query.answer(
+            "കോപ്പിറൈറ്റ് ഉള്ളതുകൊണ്ട് ഫയൽ 10 മിനിറ്റിനുള്ളിൽ ഇവിടെനിന്നും ഡിലീറ്റ് ആകുന്നതാണ് അതുകൊണ്ട് ഇവിടെ നിന്നും മറ്റെവിടെക്കെങ്കിലും മാറ്റിയതിന് ശേഷം ഡൗൺലോഡ് ചെയ്യുക!",
+            show_alert=True)
+
+    elif query.data == "ftam":
+        await query.answer(
+            "பதிப்புரிமை காரணமாக, கோப்பு இங்கிருந்து 10 நிமிடங்களில் நீக்கப்படும், எனவே இங்கிருந்து வேறு எங்காவது நகர்த்தப்பட்ட பிறகு பதிவிறக்கவும்!",
+            show_alert=True)
+
+    elif query.data == "fhin":
+        await query.answer(
+            "कॉपीराइट के कारण फ़ाइल यहां से 10 मिनट में डिलीट हो जाएगी इसलिए यहां से कहीं और ले जाकर डाउनलोड करें!",
+            show_alert=True)
 
     elif query.data == "start":
         buttons = [[
